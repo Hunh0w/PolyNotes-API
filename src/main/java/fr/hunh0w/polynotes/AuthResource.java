@@ -63,7 +63,8 @@ public class AuthResource {
                     .entity(JsonUtils.getErrorMessage("User already exists"))
                     .build();
 
-
+        user = new User(registerModel.firstname, registerModel.lastname, registerModel.email, registerModel.password);
+        user.persist();
         return Response.status(Response.Status.CREATED).build();
     }
 
