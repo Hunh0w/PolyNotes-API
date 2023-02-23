@@ -24,25 +24,42 @@ import org.jose4j.json.internal.json_simple.JSONObject;
 @RequestScoped
 public class AuthResource {
 
+    /* function(@Context SecurityContext securityContext){
+         Principal caller =  ctx.getUserPrincipal();
+         String name = caller == null ? "anonymous" : caller.getName();
+         boolean hasJWT = jwt.getClaimNames() != null;
+    */
+
     @Inject
     JsonWebToken jwt;
 
+    /**
+     *
+     * @param ctx
+     * @return
+     * @throws Exception
+     */
     @POST
     @PermitAll
     @Path("/login")
     @Produces(MediaType.TEXT_PLAIN)
-    public String login(@Context SecurityContext ctx) throws Exception {
-        GenerateToken.exec();
+    public Response login(@Context SecurityContext ctx) {
+        /*
         Principal caller =  ctx.getUserPrincipal();
         String name = caller == null ? "anonymous" : caller.getName();
         boolean hasJWT = jwt.getClaimNames() != null;
-        if(hasJWT){
+         */
 
-        }
-        String helloReply = String.format("hello + %s, isSecure: %s, authScheme: %s, hasJWT: %s", name, ctx.isSecure(), ctx.getAuthenticationScheme(), hasJWT);
-        return helloReply;
+
+        return Response.ok().build();
     }
 
+    /**
+     * TODO: Spam & CSRF Protection
+     *
+     * @param registerModel
+     * @return
+     */
     @Path("/register")
     @PermitAll
     @POST
