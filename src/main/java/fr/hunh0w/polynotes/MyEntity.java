@@ -1,6 +1,10 @@
 package fr.hunh0w.polynotes;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import io.quarkus.mongodb.panache.PanacheMongoEntity;
+import io.quarkus.mongodb.panache.common.MongoEntity;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+
 import javax.persistence.Entity;
 
 
@@ -23,7 +27,8 @@ import javax.persistence.Entity;
  *     }
  * }
  */
-@Entity
-public class MyEntity extends PanacheEntity {
+@MongoEntity(collection = "polynotesf_collection")
+public class MyEntity extends PanacheMongoEntity {
+    @BsonProperty("test")
     public String field;
 }
