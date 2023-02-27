@@ -62,7 +62,10 @@ public class AuthResource {
             return Response.status(Response.Status.UNAUTHORIZED).build();
 
         String token = TokenGenerator.getToken(user);
-        return Response.ok().header("Authorization", "Bearer "+token).build();
+        return Response.ok()
+                .header("Authorization", "Bearer "+token)
+                .header("Access-Control-Expose-Headers", "Authorization")
+                .build();
     }
 
     /**
@@ -90,7 +93,7 @@ public class AuthResource {
 
         User user = User.findByRegisterModel(registerModel);
         if(user != null)
-            return Response.status(Response.Status.BAD_REQUEST)
+            return Response.status(Response.Status.UNAUTHORIZED)
                     .entity(JsonUtils.getErrorMessage("User already exists"))
                     .build();
 
